@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Пахнет одинаково - данные о парфюмерных дупах</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600&display=swap');
+
+  :root {
+    --black: #0a0a0a;
+    --dark: #111111;
+    --card: #181818;
+    --gold: #c9a84c;
+    --gold-light: #e8c96d;
+    --cream: #f5f0e8;
+    --muted: #888888;
+    --mist-color: #7bb8c4;
+    --oil-color: #c4a96b;
+    --orig-color: #e07070;
+    --white: #ffffff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--cream);
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 60px 24px;
+    position: relative;
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, #1a1206 0%, var(--black) 70%);
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c9a84c' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+    font-weight: 500;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(44px, 8vw, 96px);
+    font-weight: 900;
+    line-height: 1.0;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  .hero-sub {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(18px, 3vw, 28px);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--muted);
+    margin-bottom: 40px;
+  }
+
+  .hero-lead {
+    max-width: 560px;
+    font-size: 16px;
+    color: #aaaaaa;
+    line-height: 1.75;
+    margin-bottom: 56px;
+  }
+
+  .scroll-hint {
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  .scroll-hint::after {
+    content: '';
+    display: block;
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+  }
+
+  @keyframes pulse { 0%,100%{opacity:0.5} 50%{opacity:1} }
+
+  /* ── SECTIONS ── */
+  section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 100px 24px;
+  }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+    font-weight: 600;
+  }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--white);
+    margin-bottom: 20px;
+  }
+
+  h2 em { font-style: italic; color: var(--gold-light); }
+
+  .lead {
+    font-size: 18px;
+    color: #aaaaaa;
+    max-width: 640px;
+    line-height: 1.75;
+    margin-bottom: 60px;
+  }
+
+  hr.divider {
+    border: none;
+    border-top: 1px solid #222;
+    margin: 0;
+  }
+
+  /* ── STAT ROW ── */
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-bottom: 80px;
+  }
+
+  .stat-card {
+    background: var(--card);
+    padding: 40px 32px;
+    text-align: center;
+  }
+
+  .stat-card:first-child { border-radius: 12px 0 0 12px; }
+  .stat-card:last-child { border-radius: 0 12px 12px 0; }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(48px, 7vw, 80px);
+    font-weight: 900;
+    line-height: 1;
+    color: var(--gold-light);
+    margin-bottom: 8px;
+  }
+
+  .stat-label {
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    line-height: 1.5;
+  }
+
+  /* ── PRICE BAR ── */
+  .price-section {
+    background: var(--dark);
+    padding: 100px 0;
+  }
+
+  .price-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .price-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    margin-top: 60px;
+  }
+
+  .price-item {
+    display: grid;
+    grid-template-columns: 200px 1fr 90px;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .price-name {
+    font-size: 13px;
+    color: var(--cream);
+    text-align: right;
+    line-height: 1.3;
+  }
+
+  .price-name small {
+    display: block;
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  .bar-track {
+    background: #1e1e1e;
+    border-radius: 4px;
+    height: 36px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+  }
+
+  .bar-fill.orig { background: linear-gradient(90deg, #b85050, #e07070); }
+  .bar-fill.mist { background: linear-gradient(90deg, #4a8a9a, #7bb8c4); }
+  .bar-fill.oil  { background: linear-gradient(90deg, #9a7830, #c4a96b); }
+
+  .price-val {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--cream);
+  }
+
+  .price-val small {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--muted);
+    display: block;
+    font-weight: 400;
+  }
+
+  .bar-legend {
+    display: flex;
+    gap: 28px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+  }
+
+  /* ── HYPOTHESES ── */
+  .hyp-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    margin-top: 56px;
+  }
+
+  .hyp-card {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 36px 32px;
+    border: 1px solid #222;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+
+  .hyp-card:hover { border-color: #444; }
+
+  .hyp-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    border-radius: 12px 12px 0 0;
+  }
+
+  .hyp-card.confirmed::before { background: linear-gradient(90deg, #3a9a5a, #5dba7c); }
+  .hyp-card.partial::before { background: linear-gradient(90deg, #c9a84c, #e8c96d); }
+  .hyp-card.rejected::before { background: linear-gradient(90deg, #9a3a3a, #c05050); }
+
+  .hyp-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    font-weight: 900;
+    line-height: 1;
+    color: #2a2a2a;
+    position: absolute;
+    top: 20px;
+    right: 24px;
+  }
+
+  .hyp-status {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+
+  .confirmed .hyp-status { color: #5dba7c; }
+  .partial .hyp-status { color: var(--gold); }
+  .rejected .hyp-status { color: #c05050; }
+
+  .hyp-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+
+  .hyp-body {
+    font-size: 14px;
+    color: #888;
+    line-height: 1.65;
+  }
+
+  .hyp-number-accent {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--gold-light);
+    display: block;
+    margin: 12px 0 4px;
+  }
+
+  /* ── CHART LONGEVITY ── */
+  .chart-section { background: var(--dark); padding: 100px 0; }
+  .chart-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+  .dot-chart {
+    margin-top: 60px;
+    display: grid;
+    grid-template-columns: 140px repeat(5, 1fr);
+    gap: 0;
+  }
+
+  .dot-header {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    text-align: center;
+    padding-bottom: 16px;
+    text-transform: uppercase;
+  }
+
+  .dot-row-label {
+    font-size: 13px;
+    color: var(--cream);
+    display: flex;
+    align-items: center;
+    padding: 12px 0;
+    border-top: 1px solid #1e1e1e;
+  }
+
+  .dot-row-label small { display: block; font-size: 11px; color: var(--muted); }
+
+  .dot-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid #1e1e1e;
+    padding: 12px 8px;
+  }
+
+  .dot {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--black);
+    transition: transform 0.2s;
+  }
+
+  .dot:hover { transform: scale(1.2); }
+  .dot.filled { background: var(--gold-light); }
+  .dot.half { background: #444; color: var(--muted); }
+  .dot.empty { background: #1e1e1e; color: #333; }
+
+  .dot.t-orig { background: var(--orig-color); }
+  .dot.t-mist { background: var(--mist-color); }
+  .dot.t-oil  { background: var(--oil-color); }
+
+  /* ── CONCLUSION ── */
+  .conclusion {
+    background: linear-gradient(135deg, #0a0a0a 0%, #12100a 100%);
+    border-top: 1px solid #1e1e1e;
+    padding: 120px 0;
+    text-align: center;
+  }
+
+  .conclusion-inner { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+
+  .conclusion h2 {
+    font-size: clamp(36px, 6vw, 64px);
+    margin-bottom: 24px;
+  }
+
+  .conclusion p {
+    font-size: 18px;
+    color: #888;
+    line-height: 1.8;
+    margin-bottom: 20px;
+  }
+
+  .conclusion .highlight {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: var(--gold-light);
+    font-style: italic;
+    margin: 40px 0;
+  }
+
+  .tag-row {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 48px;
+  }
+
+  .tag {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border: 1px solid #333;
+    border-radius: 40px;
+    padding: 8px 18px;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to bottom, rgba(10,10,10,0.95), transparent);
+    backdrop-filter: blur(10px);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-style: italic;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  /* ── TYPE LEGEND ── */
+  .type-pill {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 30px;
+    letter-spacing: 0.05em;
+  }
+  .pill-orig { background: rgba(224,112,112,0.15); color: var(--orig-color); }
+  .pill-mist { background: rgba(123,184,196,0.15); color: var(--mist-color); }
+  .pill-oil  { background: rgba(196,169,107,0.15); color: var(--oil-color); }
+
+  /* ── DATA TABLE ── */
+  .table-wrap {
+    overflow-x: auto;
+    margin-top: 56px;
+    border-radius: 12px;
+    border: 1px solid #222;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  thead th {
+    background: #141414;
+    padding: 14px 18px;
+    text-align: left;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 600;
+    border-bottom: 1px solid #222;
+    white-space: nowrap;
+  }
+
+  tbody tr {
+    border-bottom: 1px solid #1a1a1a;
+    transition: background 0.2s;
+  }
+
+  tbody tr:hover { background: #161616; }
+
+  tbody td {
+    padding: 12px 18px;
+    color: #ccc;
+    white-space: nowrap;
+  }
+
+  tbody td:first-child { color: var(--white); font-weight: 500; }
+
+  .stars { color: var(--gold); letter-spacing: -2px; }
+
+  @media (max-width: 768px) {
+    .stat-row { grid-template-columns: 1fr; gap: 2px; }
+    .stat-card:first-child { border-radius: 12px 12px 0 0; }
+    .stat-card:last-child { border-radius: 0 0 12px 12px; }
+    .price-item { grid-template-columns: 120px 1fr 70px; gap: 12px; }
+    nav { padding: 16px 20px; }
+    .nav-links { display: none; }
+  }
+
+  /* ── ANIMATIONS ── */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .bar-fill { width: 0 !important; }
+  .bar-fill.animated { width: var(--target-width) !important; }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-logo">Perfume Data</span>
+  <ul class="nav-links">
+    <li><a href="#price">Цены</a></li>
+    <li><a href="#hypotheses">Гипотезы</a></li>
+    <li><a href="#longevity">Стойкость</a></li>
+    <li><a href="#data">Данные</a></li>
+    <li><a href="#conclusion">Выводы</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="eyebrow">Дата-сторителлинг · Парфюмерный рынок РФ · 2026</div>
+  <h1>Пахнет <em>одинаково</em>.<br>Стоит иначе.</h1>
+  <p class="hero-sub">Данные о том, даёт ли реплика 90% качества за 10% цены</p>
+  <p class="hero-lead">21 культовый аромат - три формата: оригинал, мист Spa KitchLand и арабское масло. 63 позиции, 5 гипотез, один вопрос: зачем платить ×38?</p>
+  <div class="scroll-hint">листайте вниз</div>
+</section>
+
+<hr class="divider">
+
+<!-- SETUP -->
+<section id="setup">
+  <div class="section-label">Контекст</div>
+  <h2>Идея простая.<br><em>Данные - убедительные.</em></h2>
+  <p class="lead">Я покупаю мисты вместо оригинальных духов: меняю аромат каждую неделю, расход огромный. Вопрос: подтверждают ли цифры то, что чувствую носом?</p>
+
+  <div class="stat-row fade-in">
+    <div class="stat-card">
+      <div class="stat-num">21</div>
+      <div class="stat-label">культовый аромат<br>из Chanel, Dior, TF, YSL…</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">3</div>
+      <div class="stat-label">формата для каждого<br>оригинал · мист · масло</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">5</div>
+      <div class="stat-label">гипотез<br>проверено на данных</div>
+    </div>
+  </div>
+
+  <p style="font-size:14px;color:#666;margin-top:20px;">
+    <span class="type-pill pill-orig">Оригинал</span> - люксовые EDP, Лэтуаль / Золотое Яблоко &nbsp;
+    <span class="type-pill pill-mist">Мист Spa KitchLand</span> - российский бренд, WB/OZON &nbsp;
+    <span class="type-pill pill-oil">Арабское масло (ролик)</span> - Rayhan, Al Rehab, WB
+  </p>
+</section>
+
+<hr class="divider">
+
+<!-- PRICE SECTION -->
+<div class="price-section" id="price">
+  <div class="price-inner">
+    <div class="section-label fade-in">Гипотеза 1 · Цена</div>
+    <h2 class="fade-in">Разрыв в цене:<br><em>в 38 раз</em></h2>
+    <p class="lead fade-in">Мист за 400 ₽ vs оригинал за 15 500 ₽. Цена за мл - ещё нагляднее: 4 руб/мл против 155–443 руб/мл.</p>
+
+    <div class="price-bars" id="priceBars">
+
+      <div class="price-item fade-in">
+        <div class="price-name">Chanel No.5<small>оригинал EDP</small></div>
+        <div class="bar-track"><div class="bar-fill orig" style="--target-width: 100%"></div></div>
+        <div class="price-val">15 500 ₽<small>155 ₽/мл</small></div>
+      </div>
+
+      <div class="price-item fade-in">
+        <div class="price-name">Chanel No.5<small>мист Spa KitchLand</small></div>
+        <div class="bar-track"><div class="bar-fill mist" style="--target-width: 2.6%"></div></div>
+        <div class="price-val">400 ₽<small>4 ₽/мл</small></div>
+      </div>
+
+      <div class="price-item fade-in">
+        <div class="price-name">Chanel No.5<small>масло ролик Rayhan</small></div>
+        <div class="bar-track"><div class="bar-fill oil" style="--target-width: 2.3%"></div></div>
+        <div class="price-val">350 ₽<small>58 ₽/мл</small></div>
+      </div>
+
+      <div class="price-item fade-in" style="margin-top:24px;">
+        <div class="price-name">Baccarat Rouge 540<small>оригинал EDP</small></div>
+        <div class="bar-track"><div class="bar-fill orig" style="--target-width: 100%"></div></div>
+        <div class="price-val">31 000 ₽<small>443 ₽/мл</small></div>
+      </div>
+
+      <div class="price-item fade-in">
+        <div class="price-name">Baccarat Rouge 540<small>мист Spa KitchLand</small></div>
+        <div class="bar-track"><div class="bar-fill mist" style="--target-width: 1.3%"></div></div>
+        <div class="price-val">400 ₽<small>4 ₽/мл</small></div>
+      </div>
+
+      <div class="price-item fade-in">
+        <div class="price-name">Baccarat Rouge 540<small>масло ролик Rayhan</small></div>
+        <div class="bar-track"><div class="bar-fill oil" style="--target-width: 1.3%"></div></div>
+        <div class="price-val">400 ₽<small>67 ₽/мл</small></div>
+      </div>
+
+      <div class="price-item fade-in" style="margin-top:24px;">
+        <div class="price-name">Tom Ford Black Orchid<small>оригинал EDP</small></div>
+        <div class="bar-track"><div class="bar-fill orig" style="--target-width: 58%"></div></div>
+        <div class="price-val">18 000 ₽<small>360 ₽/мл</small></div>
+      </div>
+
+      <div class="price-item fade-in">
+        <div class="price-name">Tom Ford Black Orchid<small>мист Spa KitchLand</small></div>
+        <div class="bar-track"><div class="bar-fill mist" style="--target-width: 1.3%"></div></div>
+        <div class="price-val">400 ₽<small>4 ₽/мл</small></div>
+      </div>
+
+      <div class="price-item fade-in">
+        <div class="price-name">Tom Ford Black Orchid<small>масло ролик</small></div>
+        <div class="bar-track"><div class="bar-fill oil" style="--target-width: 1.1%"></div></div>
+        <div class="price-val">350 ₽<small>58 ₽/мл</small></div>
+      </div>
+
+    </div>
+
+    <div class="bar-legend" style="margin-top:48px;">
+      <div class="legend-item"><div class="legend-dot" style="background:var(--orig-color)"></div> Оригинал (EDP)</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--mist-color)"></div> Мист Spa KitchLand</div>
+      <div class="legend-item"><div class="legend-dot" style="background:var(--oil-color)"></div> Арабское масло (ролик)</div>
+    </div>
+
+    <p style="margin-top:32px;font-size:14px;color:#555;font-style:italic;">* Длина баров - относительная доля от самого дорогого оригинала (31 000 ₽). Мист и масло визуально почти неотличимы от нуля - именно это и есть главный инсайт.</p>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- HYPOTHESES -->
+<section id="hypotheses">
+  <div class="section-label">Анализ</div>
+  <h2>5 гипотез -<br><em>5 ответов</em></h2>
+  <p class="lead">Каждую гипотезу проверяли по данным из таблицы: цены WB/OZON/Лэтуаль, рейтинги стойкости по Fragrantica и irecommend.</p>
+
+  <div class="hyp-grid">
+
+    <div class="hyp-card confirmed fade-in">
+      <div class="hyp-num">01</div>
+      <div class="hyp-status">✓ Подтверждена</div>
+      <div class="hyp-title">Мист стоит &lt;3% от оригинала</div>
+      <span class="hyp-number-accent">×38</span>
+      <p class="hyp-body">Средняя цена оригинала - 13 200 ₽ / 90 мл. Мист Spa KitchLand - 400 ₽ / 100 мл. Разница в цене за мл: 4 ₽ vs 155 ₽. Гипотеза «10% цены» - даже скромная оценка. На деле - меньше 3%.</p>
+    </div>
+
+    <div class="hyp-card confirmed fade-in">
+      <div class="hyp-num">02</div>
+      <div class="hyp-status">✓ Подтверждена</div>
+      <div class="hyp-title">Арабские масла более стойкие, чем мисты</div>
+      <span class="hyp-number-accent">4/5 vs 2/5</span>
+      <p class="hyp-body">Средний рейтинг стойкости масел - 3.9/5, мистов - 1.7/5. Масло наносится точечно на пульсирующие точки и держится 6–10 часов. Мист - 2–3 часа. Разница значимая.</p>
+    </div>
+
+    <div class="hyp-card confirmed fade-in">
+      <div class="hyp-num">03</div>
+      <div class="hyp-status">✓ Подтверждена</div>
+      <div class="hyp-title">Линейка мист+крем усиливает стойкость</div>
+      <span class="hyp-number-accent">+1–2 ч</span>
+      <p class="hyp-body">Spa KitchLand выпускает мист, крем и лосьон одного аромата. Слоистое нанесение удерживает запах дольше: крем создаёт базу, мист - шлейф. Это главное конкурентное преимущество перед маслом.</p>
+    </div>
+
+    <div class="hyp-card partial fade-in">
+      <div class="hyp-num">04</div>
+      <div class="hyp-status">◐ Частично</div>
+      <div class="hyp-title">Масло экономичнее по расходу, но дороже за мл</div>
+      <span class="hyp-number-accent">58 vs 4 ₽/мл</span>
+      <p class="hyp-body">Масло (6 мл) стоит 350 ₽ → 58 ₽/мл. Мист (100 мл) → 4 ₽/мл. Но расход масла - 1–2 капли в день, мист - 5–10 нажатий. Реальный срок службы 6 мл масла - ~60 дней, что делает его сопоставимым по итоговым тратам.</p>
+    </div>
+
+    <div class="hyp-card confirmed fade-in">
+      <div class="hyp-num">05</div>
+      <div class="hyp-status">✓ Подтверждена</div>
+      <div class="hyp-title">Тяжёлые ароматы лучше передаются в масле</div>
+      <span class="hyp-number-accent">восток = масло</span>
+      <p class="hyp-body">Tobacco Vanille, Black Orchid, Black Opium - ароматы с тяжёлой базой (пачули, ваниль, табак). В масле стойкость 4–5/5, шлейф 4/5. Свежие ноты (Acqua Di Gioia, L'Imperatrice) в масле теряются: стойкость 2/5. Совпадение с профилем аромата - не случайность.</p>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- LONGEVITY CHART -->
+<div class="chart-section" id="longevity">
+  <div class="chart-inner">
+    <div class="section-label fade-in">Гипотеза 2 · Стойкость</div>
+    <h2 class="fade-in">Масло держится.<br><em>Мист исчезает.</em></h2>
+    <p class="lead fade-in">Сравнение рейтинга стойкости (1–5) по 7 ароматам. Оригиналы и масла конкурируют. Мисты - в отдельной лиге.</p>
+
+    <div class="dot-chart fade-in">
+      <div></div>
+      <div class="dot-header">1</div>
+      <div class="dot-header">2</div>
+      <div class="dot-header">3</div>
+      <div class="dot-header">4</div>
+      <div class="dot-header">5</div>
+
+      <!-- Chanel No5 -->
+      <div class="dot-row-label">Chanel No.5<small>оригинал</small></div>
+      <div class="dot-cell"><div class="dot t-orig">–</div></div>
+      <div class="dot-cell"><div class="dot t-orig">–</div></div>
+      <div class="dot-cell"><div class="dot t-orig">–</div></div>
+      <div class="dot-cell"><div class="dot t-orig">4</div></div>
+      <div class="dot-cell"><div class="dot empty">–</div></div>
+
+      <div class="dot-row-label">Chanel No.5<small>мист</small></div>
+      <div class="dot-cell"><div class="dot empty">–</div></div>
+      <div class="dot-cell"><div class="dot t-mist">2</div></div>
+      <div class="dot-cell"><div class="dot empty">–</div></div>
+      <div class="dot-cell"><div class="dot empty">–</div></div>
+      <div class="dot-cell"><div class="dot empty">–</div></div>
+
+      <div class="dot-row-label">Chanel No.5<small>масло</small></div>
+      <div class="dot-cell"><div class="dot empty">–</div></div>
+      <div class="dot-cell"><div class="dot empty">–</div></div>
+      <div class="dot-cell"><div class="dot empty">–</div></div>
+      <div class="dot-cell"><div class="dot t-oil">4</div></div>
+      <div class="dot-cell"><div class="dot empty">–</div></div>
+
+      <!-- BRS -->
+      <div class="dot-row-label">Baccarat Rouge<small>оригинал</small></div>
+      <div class="dot-cell"><div class="dot empty">–</div></div>
+      <div class="dot-cell"><div class="dot empty">–</div></div>
+      <div class="dot-cell"><div class="dot empty">–</div></div>
+      <div class="dot-cell"><div class="dot empty">–</div></div>
+      <div class="dot-cell"><div class="dot t-orig">5</div></div>
+
+      <div class="dot-row-label">Baccarat Rouge<small>мист</small></div>
+      <div class="dot-cell"><div class="dot empty">–</div></div>
+      <div class="dot-cell"><div class="dot t-mist">2</div></div>
+      <div class="dot-cell"><div class="dot empty">–</div></div>
+      <div class="dot-cell"><div class="dot empty">–</div></div>
+      <div class="dot-cell"><div class="dot empty">–</div></div>
+
+      <div class="dot-row-label">Baccarat Rouge<small>масло</small></div>
+      <div class="dot-cell"><div class="dot empty">–</div></div>
+      <div class="dot-cell"><div class="dot empty">–</div></div>
+      <div class="dot-cell"><div class="dot empty">–</div></div>
+      <div class="dot-cell"><div class="dot empty">–</div></div>
+      <div class="dot-cell"><div class="dot t-oil">5</div></div>
+
+      <!-- Tom Ford TV -->
+      <div class="dot-row-label">Tobacco Vanille<small>оригинал</small></div>
+      <div class="dot-cell"><div class="dot empty">–</div></div>
+      <div class="dot-cell"><div class="dot empty">–</div></div>
+      <div class="dot-cell"><div class="dot empty">–</div></div>
+      <div class="dot-cell"><div class="dot empty">–</div></div>
+      <div class="dot-cell"><div class="dot t-orig">5</div></div>
+
+      <div class="dot-row-label">Tobacco Vanille<small>мист</small></div>
+      <div class="dot-cell"><div class="dot empty">–</div></div>
+      <div class="dot-cell"><div class="dot t-mist">2</div></div>
+      <div class="dot-cell"><div class="dot empty">–</div></div>
+      <div class="dot-cell"><div class="dot empty">–</div></div>
+      <div class="dot-cell"><div class="dot empty">–</div></div>
+
+      <div class="dot-row-label">Tobacco Vanille<small>масло</small></div>
+      <div class="dot-cell"><div class="dot empty">–</div></div>
+      <div class="dot-cell"><div class="dot empty">–</div></div>
+      <div class="dot-cell"><div class="dot empty">–</div></div>
+      <div class="dot-cell"><div class="dot empty">–</div></div>
+      <div class="dot-cell"><div class="dot t-oil">5</div></div>
+
+      <!-- Black Opium -->
+      <div class="dot-row-label">Black Opium<small>оригинал</small></div>
+      <div class="dot-cell"><div class="dot empty">–</div></div>
+      <div class="dot-cell"><div class="dot empty">–</div></div>
+      <div class="dot-cell"><div class="dot empty">–</div></div>
+      <div class="dot-cell"><div class="dot t-orig">4</div></div>
+      <div class="dot-cell"><div class="dot empty">–</div></div>
+
+      <div class="dot-row-label">Black Opium<small>мист</small></div>
+      <div class="dot-cell"><div class="dot empty">–</div></div>
+      <div class="dot-cell"><div class="dot t-mist">2</div></div>
+      <div class="dot-cell"><div class="dot empty">–</div></div>
+      <div class="dot-cell"><div class="dot empty">–</div></div>
+      <div class="dot-cell"><div class="dot empty">–</div></div>
+
+      <div class="dot-row-label">Black Opium<small>масло SKL</small></div>
+      <div class="dot-cell"><div class="dot empty">–</div></div>
+      <div class="dot-cell"><div class="dot empty">–</div></div>
+      <div class="dot-cell"><div class="dot empty">–</div></div>
+      <div class="dot-cell"><div class="dot t-oil">4</div></div>
+      <div class="dot-cell"><div class="dot empty">–</div></div>
+
+    </div>
+
+    <p style="margin-top:40px;font-size:13px;color:#555;font-style:italic;">Данные: Fragrantica.ru (оригиналы), irecommend.ru и отзывы Wildberries (мисты и масла). Рейтинги субъективны и усреднены.</p>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- DATA TABLE -->
+<section id="data">
+  <div class="section-label">Данные</div>
+  <h2>Выборка:<br><em>топ-7 ароматов</em></h2>
+  <p class="lead">Полная таблица из 63 строк доступна в CSV. Здесь - ключевые пары для наглядности.</p>
+
+  <div class="table-wrap fade-in">
+    <table>
+      <thead>
+        <tr>
+          <th>Аромат</th>
+          <th>Тип</th>
+          <th>Цена</th>
+          <th>₽/мл</th>
+          <th>Стойкость</th>
+          <th>Шлейф</th>
+          <th>Линейка</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Chanel No.5</td><td><span class="type-pill pill-orig">оригинал</span></td><td>15 500 ₽</td><td>155</td><td><span class="stars">★★★★</span>☆</td><td><span class="stars">★★★★</span>☆</td><td>-</td></tr>
+        <tr><td>Chanel No.5</td><td><span class="type-pill pill-mist">мист</span></td><td>400 ₽</td><td>4</td><td><span class="stars">★★</span>☆☆☆</td><td><span class="stars">★★</span>☆☆☆</td><td>✓ мист+крем+лосьон</td></tr>
+        <tr><td>Chanel No.5</td><td><span class="type-pill pill-oil">масло</span></td><td>350 ₽</td><td>58</td><td><span class="stars">★★★★</span>☆</td><td><span class="stars">★★★</span>☆☆</td><td>-</td></tr>
+
+        <tr><td>Baccarat Rouge 540</td><td><span class="type-pill pill-orig">оригинал</span></td><td>31 000 ₽</td><td>443</td><td><span class="stars">★★★★★</span></td><td><span class="stars">★★★★★</span></td><td>-</td></tr>
+        <tr><td>Baccarat Rouge 540</td><td><span class="type-pill pill-mist">мист</span></td><td>400 ₽</td><td>4</td><td><span class="stars">★★</span>☆☆☆</td><td><span class="stars">★★</span>☆☆☆</td><td>✓ мист+крем+лосьон</td></tr>
+        <tr><td>Baccarat Rouge 540</td><td><span class="type-pill pill-oil">масло</span></td><td>400 ₽</td><td>67</td><td><span class="stars">★★★★★</span></td><td><span class="stars">★★★★</span>☆</td><td>-</td></tr>
+
+        <tr><td>Good Girl</td><td><span class="type-pill pill-orig">оригинал</span></td><td>12 500 ₽</td><td>156</td><td><span class="stars">★★★★</span>☆</td><td><span class="stars">★★★★</span>☆</td><td>-</td></tr>
+        <tr><td>Good Girl</td><td><span class="type-pill pill-mist">мист</span></td><td>400 ₽</td><td>4</td><td><span class="stars">★★</span>☆☆☆</td><td><span class="stars">★★★</span>☆☆</td><td>✓ мист+крем+лосьон</td></tr>
+        <tr><td>Good Girl</td><td><span class="type-pill pill-oil">масло</span></td><td>350 ₽</td><td>58</td><td><span class="stars">★★★★</span>☆</td><td><span class="stars">★★★★</span>☆</td><td>-</td></tr>
+
+        <tr><td>Tobacco Vanille</td><td><span class="type-pill pill-orig">оригинал</span></td><td>18 000 ₽</td><td>360</td><td><span class="stars">★★★★★</span></td><td><span class="stars">★★★★★</span></td><td>-</td></tr>
+        <tr><td>Tobacco Vanille</td><td><span class="type-pill pill-mist">мист</span></td><td>400 ₽</td><td>4</td><td><span class="stars">★★</span>☆☆☆</td><td><span class="stars">★★★</span>☆☆</td><td>✓ мист+крем+лосьон</td></tr>
+        <tr><td>Tobacco Vanille</td><td><span class="type-pill pill-oil">масло</span></td><td>350 ₽</td><td>58</td><td><span class="stars">★★★★★</span></td><td><span class="stars">★★★★</span>☆</td><td>-</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- CONCLUSION -->
+<div class="conclusion" id="conclusion">
+  <div class="conclusion-inner">
+    <div class="section-label fade-in" style="text-align:center">Вывод</div>
+    <h2 class="fade-in">Дуп - <em>не компромисс.</em><br>Это стратегия.</h2>
+    <p class="fade-in">Данные подтвердили: мист Spa KitchLand стоит в 38 раз дешевле оригинала при сопоставимой ноте аромата. Арабское масло-ролик стоит столько же, но держится как оригинал.</p>
+    <p class="fade-in" style="margin-top:16px;">Победитель зависит от сценария: <strong style="color:var(--cream)">мист + крем</strong> - для повседневного многослойного образа. <strong style="color:var(--cream)">Масло</strong> - для вечера и тяжёлых ароматов.</p>
+
+    <div class="highlight fade-in">«Зачем платить 31 000 ₽ за аромат, если 400 ₽ даёт тот же шлейф на первые три часа?»</div>
+
+    <p class="fade-in" style="font-size:14px;color:#555;">Единственное, чего не даёт дуп - это флакон на полке и истории о носах Фрэнсиса Куркджяна. Но если цель - пахнуть, а не коллекционировать, цифры говорят сами за себя.</p>
+
+    <div class="tag-row fade-in">
+      <span class="tag">63 позиции</span>
+      <span class="tag">5 гипотез</span>
+      <span class="tag">Источники: WB · OZON · Fragrantica</span>
+      <span class="tag">Spa KitchLand</span>
+      <span class="tag">Rayhan · Al Rehab</span>
+      <span class="tag">Россия 2026</span>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Fade in on scroll
+  const fadeEls = document.querySelectorAll('.fade-in');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  fadeEls.forEach(el => observer.observe(el));
+
+  // Animate price bars when they come into view
+  const bars = document.querySelectorAll('.bar-fill');
+  const barObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('animated'), 300);
+        barObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  bars.forEach(b => barObserver.observe(b));
+</script>
+</body>
+</html>
